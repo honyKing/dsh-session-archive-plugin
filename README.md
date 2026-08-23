@@ -26,6 +26,9 @@ dsh plugin --profile web add git+https://github.com/honyKing/dsh-session-archive
 
 # Gitee（国内镜像）
 dsh plugin --profile web add git+https://gitee.com/xiyoudada/dsh-session-archive-plugin.git
+
+# npm（发布后可用）
+dsh plugin --profile web add dsh-session-archive-plugin
 ```
 
 > 注意：`github:` / `gitee:` 简写不被 pnpm 支持，必须用完整的 `git+https://...` URL。
