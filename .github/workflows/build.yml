@@ -40,3 +40,6 @@ jobs:
 
       - name: Syntax-check skill scripts
         run: python -m py_compile skills/session-archive/scripts/archive_session.py skills/session-archive/scripts/search_archive.py
+
+      - name: Run skill script smoke tests
+        run: python -m unittest skills/session-archive/scripts/test_session_archive.py -v
