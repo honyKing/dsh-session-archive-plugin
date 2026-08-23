@@ -1,0 +1,42 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  typecheck-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install (dev deps only; @deepseek-ai/* resolve from the DSH profile at runtime)
+        run: pnpm install --ignore-scripts
+
+      - name: Type-check
+        run: pnpm typecheck
+
+      - name: Build
+        run: pnpm build
+
+      - name: Verify lib artifacts
+        run: |
+          test -f lib/index.js
+          test -f lib/config.js
+          test -f lib/types/index.d.ts
+          test -f skills/session-archive/SKILL.md
+          test -f skills/session-archive/scripts/archive_session.py
+          test -f skills/session-archive/scripts/search_archive.py
+
+      - name: Syntax-check skill scripts
+        run: python -m py_compile skills/session-archive/scripts/archive_session.py skills/session-archive/scripts/search_archive.py
