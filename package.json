@@ -32,6 +32,12 @@
   "engines": {
     "node": "^22.19.0 || >=24.0.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/honyKing/dsh-session-archive-plugin.git"
+  },
+  "homepage": "https://github.com/honyKing/dsh-session-archive-plugin",
+  "bugs": "https://github.com/honyKing/dsh-session-archive-plugin/issues",
   "keywords": [
     "dsh-plugin",
     "deepseek-harness",
