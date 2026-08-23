@@ -40,9 +40,9 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@deepseek-ai/cordis": "*",
-    "@deepseek-ai/dsh-tools": "*",
-    "schemastery": "*"
+    "@deepseek-ai/cordis": ">=4.0.0",
+    "@deepseek-ai/dsh-tools": ">=0.0.1-rc.1",
+    "@deepseek-ai/schemastery": ">=3.18.0"
   },
   "peerDependenciesMeta": {
     "@deepseek-ai/cordis": {
@@ -51,7 +51,7 @@
     "@deepseek-ai/dsh-tools": {
       "optional": true
     },
-    "schemastery": {
+    "@deepseek-ai/schemastery": {
       "optional": true
     }
   },

@@ -1,10 +1,6 @@
 # dependencies
 node_modules/
 
-# build output
-lib/
-*.tsbuildinfo
-
 # pack artifacts
 *.tgz
 
