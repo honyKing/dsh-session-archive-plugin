@@ -1,5 +1,8 @@
 # dsh-session-archive-plugin
 
+[![GitHub](https://img.shields.io/badge/GitHub-honyKing%2Fdsh--session--archive--plugin-181717?logo=github)](https://github.com/honyKing/dsh-session-archive-plugin)
+[![Gitee](https://img.shields.io/badge/Gitee-xiyoudada%2Fdsh--session--archive--plugin-C71D23?logo=gitee)](https://gitee.com/xiyoudada/dsh-session-archive-plugin)
+
 DSH 插件：**上下文存档 + 历史检索**。把 `session-archive` 技能打包成正式 DSH bundle 插件——安装插件即同时获得**两个模型工具**和**打包技能**，无需手动配置 `~/.agents/skills`。
 
 ## 功能
@@ -14,13 +17,17 @@ DSH 的 `compaction-basic`（liangshen preset）已原生实现 1M 上下文 80%
 
 ## 安装
 
-### 一键安装（Gitee 仓库）
+### 一键安装
 
 ```sh
+# GitHub（推荐）
+dsh plugin --profile web add git+https://github.com/honyKing/dsh-session-archive-plugin.git
+
+# Gitee（国内镜像）
 dsh plugin --profile web add git+https://gitee.com/xiyoudada/dsh-session-archive-plugin.git
 ```
 
-> 注意：`gitee:` 简写不被 pnpm 支持，必须用完整的 `git+https://gitee.com/...` URL。
+> 注意：`github:` / `gitee:` 简写不被 pnpm 支持，必须用完整的 `git+https://...` URL。
 
 ### 其他方式
 
