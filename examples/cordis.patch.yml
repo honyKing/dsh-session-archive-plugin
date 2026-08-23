@@ -1,0 +1,25 @@
+# 示例：在 profile 的 cordis.patch.yml 中覆盖插件配置
+
+把下面内容合并进你的 profile 用户补丁层（`~/.dsh/profiles/web/cordis.patch.yml`，
+即文件顶层的 `- insert:` 列表里追加，或按 dsh 文档在 bundle 层之后覆盖）。
+
+```yaml
+- insert:
+    - id: session-archive
+      config:
+        # 使用 py 启动器（Windows 上 python 不在 PATH 时）
+        pythonBin: py
+        # 缩短单次脚本调用超时（毫秒）
+        timeoutMs: 60000
+        # 距上次存档新增达到 2MB 才再次存档（更宽松的幂等阈值）
+        reArchiveGapMb: 2
+```
+
+## 配置项一览
+
+| 键 | 默认 | 说明 |
+|---|---|---|
+| `scriptsDir` | 打包内 `skills/session-archive/scripts` | 脚本目录覆盖（绝对路径或相对 profile cwd） |
+| `pythonBin` | `python` | Python 可执行名 |
+| `timeoutMs` | `120000` | 单次脚本调用超时 |
+| `reArchiveGapMb` | `1` | 距上次存档新增阈值（MB，幂等） |

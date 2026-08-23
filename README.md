@@ -68,6 +68,7 @@ dsh plugin --profile web add ./dsh-session-archive-plugin-<version>.tgz
 node scripts/link-deps.mjs   # 开发期类型链接（@deepseek-ai/* → profile 共享 node_modules）
 npm run build                # tsc → lib/（含 .d.ts）
 npm run pack                 # build + pnpm pack
+python -m unittest skills/session-archive/scripts/test_session_archive.py -v   # 技能脚本冒烟测试
 ```
 
 > `@deepseek-ai/*` 为 optional peer 依赖，运行时从 DSH profile 的共享 node_modules 解析，不重复安装。
@@ -78,12 +79,15 @@ npm run pack                 # build + pnpm pack
 src/index.ts        host 插件（Config + 工具注册）
 src/config.ts       schemastery 配置 schema
 scripts/link-deps.mjs  开发期类型链接脚本
-skills/session-archive/   打包技能（SKILL.md + Python 脚本）
+skills/session-archive/   打包技能（SKILL.md + Python 脚本 + 冒烟测试）
 lib/                构建产物（已入库，git 安装无需构建）
 cordis.patch.yml    bundle 补丁（host 行 + skill-filesystem 行）
+examples/           配置示例
+docs/architecture.md    架构说明
 ```
 
 > `lib/` 提交进仓库：`dsh plugin add <git-url>` 安装后开箱即用，无需在目标机器上构建。
+> 完整开发与发布规范见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 许可
 
