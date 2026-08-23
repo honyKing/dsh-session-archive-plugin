@@ -1,0 +1,22 @@
+# dsh-session-archive-plugin bundle patch
+#
+# Two rows:
+#  1. the host plugin row — registers archive_session / search_archive tools;
+#  2. a skill-filesystem provider exposing the packaged skills/session-archive
+#     tree, so installing this plugin provides the skill too (no manual
+#     ~/.agents/skills step).
+#
+# The bundledSkillDir expression resolves the installed package root from the
+# profile's Loader baseUrl (same pattern as archify-dsh). IMPORTANT: the !!js
+# scalar must stay on ONE line — multi-line !!js scalars fail YAML validation
+# at profile boot.
+- insert:
+    - id: session-archive
+      name: 'dsh-session-archive-plugin'
+
+    - id: session-archive-skill-filesystem
+      name: '@deepseek-ai/dsh-skill-filesystem'
+      config:
+        providerName: session-archive-plugin
+        includeDefaultRoots: false
+        bundledSkillDir: !!js process.getBuiltinModule('node:path').join(process.getBuiltinModule('node:path').dirname(process.getBuiltinModule('node:module').createRequire(baseUrl).resolve('dsh-session-archive-plugin/package.json')), 'skills')

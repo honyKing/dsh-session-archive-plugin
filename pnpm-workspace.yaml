@@ -1,0 +1,9 @@
+# pnpm auto-installs peer dependencies, and @deepseek-ai/dsh-session declares
+# an unpublished peer @deepseek-ai/dsh-type-meta (npm skips it gracefully,
+# pnpm hard-fails). Disable auto peer install: @deepseek-ai/* runtime deps are
+# resolved from the DSH profile's shared node_modules, not installed here
+# (see scripts/link-deps.mjs for dev-time type linking).
+autoInstallPeers: false
+
+allowBuilds:
+  esbuild: true
