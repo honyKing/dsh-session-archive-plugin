@@ -14,16 +14,26 @@ DSH 的 `compaction-basic`（liangshen preset）已原生实现 1M 上下文 80%
 
 ## 安装
 
+### 一键安装（Gitee 仓库）
+
+```sh
+dsh plugin --profile web add git+https://gitee.com/xiyoudada/dsh-session-archive-plugin.git
+```
+
+> 注意：`gitee:` 简写不被 pnpm 支持，必须用完整的 `git+https://gitee.com/...` URL。
+
+### 其他方式
+
 ```sh
 # 本地目录（开发）
 dsh plugin --profile web add E:/path/to/dsh-session-archive-plugin
 
-# 打包发布（npm）
-npm run pack            # 产出 .tgz
-dsh plugin --profile web add ./dsh-session-archive-plugin-0.2.0.tgz
+# 打包安装（.tgz）
+pnpm pack
+dsh plugin --profile web add ./dsh-session-archive-plugin-<version>.tgz
 ```
 
-安装后**重启 `dsh web`**，模型即可调用 `archive_session` / `search_archive`。
+安装后**重启 `dsh web`**，模型即可调用 `archive_session` / `search_archive`，技能同时进入会话技能目录。
 
 ## 配置
 
@@ -34,7 +44,7 @@ dsh plugin --profile web add ./dsh-session-archive-plugin-0.2.0.tgz
 | `scriptsDir` | 打包内 `skills/session-archive/scripts` | 脚本目录覆盖 |
 | `pythonBin` | `python` | Python 可执行名 |
 | `timeoutMs` | `120000` | 单次脚本调用超时 |
-| `reArchiveGapMb` | `0.5` | 距上次存档新增阈值（幂等） |
+| `reArchiveGapMb` | `1` | 距上次存档新增阈值（MB，幂等） |
 
 在 profile 的 `cordis.patch.yml` 中覆盖：
 
@@ -48,19 +58,25 @@ dsh plugin --profile web add ./dsh-session-archive-plugin-0.2.0.tgz
 ## 开发
 
 ```sh
-npm run build     # esbuild → lib/index.js
-npm run pack      # build + pnpm pack
+node scripts/link-deps.mjs   # 开发期类型链接（@deepseek-ai/* → profile 共享 node_modules）
+npm run build                # tsc → lib/（含 .d.ts）
+npm run pack                 # build + pnpm pack
 ```
+
+> `@deepseek-ai/*` 为 optional peer 依赖，运行时从 DSH profile 的共享 node_modules 解析，不重复安装。
 
 ## 结构
 
 ```
 src/index.ts        host 插件（Config + 工具注册）
 src/config.ts       schemastery 配置 schema
-scripts/build.mjs   esbuild 构建（@deepseek-ai/* 与 schemastery 走 peer 解析）
+scripts/link-deps.mjs  开发期类型链接脚本
 skills/session-archive/   打包技能（SKILL.md + Python 脚本）
+lib/                构建产物（已入库，git 安装无需构建）
 cordis.patch.yml    bundle 补丁（host 行 + skill-filesystem 行）
 ```
+
+> `lib/` 提交进仓库：`dsh plugin add <git-url>` 安装后开箱即用，无需在目标机器上构建。
 
 ## 许可
 
