@@ -1,6 +1,6 @@
 {
   "name": "dsh-session-archive-plugin",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "DSH plugin: context archiving + historical retrieval — archive_session / search_archive tools over the session-archive skill (zstd session-log decode).",
   "license": "MIT",
   "type": "module",
@@ -16,8 +16,11 @@
   "files": [
     "lib",
     "skills",
+    "examples",
+    "docs",
     "cordis.patch.yml",
     "README.md",
+    "CHANGELOG.md",
     "LICENSE"
   ],
   "scripts": {

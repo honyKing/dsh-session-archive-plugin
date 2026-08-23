@@ -2,6 +2,7 @@
 
 [![GitHub](https://img.shields.io/badge/GitHub-honyKing%2Fdsh--session--archive--plugin-181717?logo=github)](https://github.com/honyKing/dsh-session-archive-plugin)
 [![Gitee](https://img.shields.io/badge/Gitee-xiyoudada%2Fdsh--session--archive--plugin-C71D23?logo=gitee)](https://gitee.com/xiyoudada/dsh-session-archive-plugin)
+[![build](https://github.com/honyKing/dsh-session-archive-plugin/actions/workflows/build.yml/badge.svg)](https://github.com/honyKing/dsh-session-archive-plugin/actions/workflows/build.yml)
 
 DSH 插件：**上下文存档 + 历史检索**。把 `session-archive` 技能打包成正式 DSH bundle 插件——安装插件即同时获得**两个模型工具**和**打包技能**，无需手动配置 `~/.agents/skills`。
 
